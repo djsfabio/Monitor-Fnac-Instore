@@ -1,0 +1,5 @@
+selenium
+numpy
+termcolor
+discord_notify
+pyfiglet
