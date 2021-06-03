@@ -26,5 +26,4 @@ python moniteurFnacIDF.py
 ```
 python moniteurFnacPerimetre.py
 ```
-## Nécessite Google Chrome Version 91.0.4472.77
-### Changer l'exécutable Unix nommé "chromedriver" si version différente et le placer à la racine.
+
