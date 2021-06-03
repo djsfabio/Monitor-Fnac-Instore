@@ -3,3 +3,4 @@ numpy
 termcolor
 discord_notify
 pyfiglet
+webdriver_manager

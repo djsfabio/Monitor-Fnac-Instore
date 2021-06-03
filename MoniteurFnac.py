@@ -6,6 +6,8 @@ from termcolor import colored
 import discord_notify as dn
 from datetime import datetime
 import pyfiglet
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 ascii_banner = pyfiglet.figlet_format("MonitorFnac!", font = "slant")
 print(colored(ascii_banner, "cyan"))
@@ -14,7 +16,10 @@ print("Veuillez entrer le webhook du chanel Discord concerné.")
 notifier = dn.Notifier(str(input()))
 
 def main (): 
-  driver = webdriver.Chrome("./chromedriver")
+  # options = webdriver.ChromeOptions()
+  # options.add_argument("--enable-javascript")
+  # options.set_headless()
+  driver = webdriver.Chrome(ChromeDriverManager().install())
 
   print("Veuillez entrer le PRID du produit que vous recherchez : (Exemple : 14119961 -> PS5 Digital // 14119956 -> PS5 Disc")
   prid = str(input())
@@ -24,9 +29,6 @@ def main ():
 
   heureOuverture = 8
   heureFermeture = 21
-
-  pauseFermetureOuverture = heureOuverture + 24 - heureFermeture
-
 
   try:
     while True:
