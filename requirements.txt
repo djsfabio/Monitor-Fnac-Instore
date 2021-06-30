@@ -4,3 +4,4 @@ termcolor
 discord_notify
 pyfiglet
 webdriver_manager
+fake-useragent

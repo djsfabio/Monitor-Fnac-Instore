@@ -7,6 +7,8 @@ import discord_notify as dn
 from datetime import datetime
 import pyfiglet
 from webdriver_manager.chrome import ChromeDriverManager
+from fake_useragent import UserAgent
+from selenium.webdriver.chrome.options import Options
 
 
 ascii_banner = pyfiglet.figlet_format("MonitorFnac!", font = "slant")
@@ -16,10 +18,15 @@ print("Veuillez entrer le webhook du chanel Discord concerné.")
 notifier = dn.Notifier(str(input()))
 
 def main (): 
-  # options = webdriver.ChromeOptions()
-  # options.add_argument("--enable-javascript")
-  # options.set_headless()
-  driver = webdriver.Chrome(ChromeDriverManager().install())
+  options = Options()
+  ua = UserAgent()
+  userAgent = ua.random
+  print(userAgent)
+  options.add_argument(f'user-agent={userAgent}')
+  # Options si on souhaite lancer en headless, non disponible sur Fnac.com
+  # options.add_argument('--headless')
+  # options.add_argument('--disable-gpu')
+  driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
 
   print("Veuillez entrer le PRID du produit que vous recherchez : (Exemple : 14119961 -> PS5 Digital // 14119956 -> PS5 Disc")
   prid = str(input())
@@ -93,7 +100,12 @@ def get_info_on_fnac(driver, prid, latitudeVille, longitudeVille, minTemps, maxT
 
   driver.get(link)
 
+  # print(driver.find_element_by_tag_name("Body").text)
+
   elementBody = driver.find_element_by_tag_name("body")
+
+  print(elementBody.text)
+  
 
   # Si le produit est disponible dans la réponse reçue, nous allons noter quels magasins le propose. 
   if "En rayon" in elementBody.text :
