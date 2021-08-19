@@ -7,8 +7,6 @@ import discord_notify as dn
 from datetime import datetime
 import pyfiglet
 from webdriver_manager.chrome import ChromeDriverManager
-from fake_useragent import UserAgent
-from selenium.webdriver.chrome.options import Options
 
 
 ascii_banner = pyfiglet.figlet_format("MonitorFnac!", font = "slant")
@@ -18,15 +16,7 @@ print("Veuillez entrer le webhook du chanel Discord concerné.")
 notifier = dn.Notifier(str(input()))
 
 def main (): 
-  options = Options()
-  ua = UserAgent()
-  userAgent = ua.random
-  print(userAgent)
-  options.add_argument(f'user-agent={userAgent}')
-  # Options si on souhaite lancer en headless, non disponible sur Fnac.com
-  # options.add_argument('--headless')
-  # options.add_argument('--disable-gpu')
-  driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+  driver = webdriver.Chrome(ChromeDriverManager().install())
 
   print("Veuillez entrer le PRID du produit que vous recherchez : (Exemple : 14119961 -> PS5 Digital // 14119956 -> PS5 Disc")
   prid = str(input())
